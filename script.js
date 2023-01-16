@@ -30,21 +30,26 @@ function touching(idx){
 }
 
 draw = function(){
-    console.log("pee is stored in the balls")
-    console.log(d.length)
+    getTouched = []
     for(i=0; i<d.length; i++){
-        getTouched = touching(i)
+        getTouched.push(touching(i))
+        
         document.onmousemove = (event) => {
             x = event.clientX
             y = event.clientY
         }
-        if(getTouched == 3 && d[i].dirty == false){
+    }
+    for(i=0; i<getTouched.length; i++){
+        if(i == 382){
+            console.log("ben is a boob")
+        }
+        if(getTouched[i] == 3 && d[i].dirty == false){
             d[i].dirty = true
-        }else if(getTouched >= 2 && getTouched <= 3 && d[i].dirty == true){
+        }else if(getTouched[i] >= 2 && getTouched[i] <= 3 && d[i].dirty == true){
             d[i].dirty = true
-        }/*else if(x >= d[i].x && x <= d[i].x + 10 && y >= d[i].y && y <= d[i].y + 10){
+        }else if(x >= d[i].x && x <= d[i].x + 10 && y >= d[i].y && y <= d[i].y + 10){
             d[i].dirty = true
-        } */else {
+        } else {
             d[i].dirty = false
         }
         if(d[i].dirty){
@@ -53,11 +58,14 @@ draw = function(){
             ctx.closePath();
         } else{
             ctx.beginPath();
+            ctx.fillStyle = "white"
+            ctx.fillRect(d[i].x, d[i].y, 10, 10)
+            ctx.fillStyle = "black"
             ctx.strokeRect(d[i].x, d[i].y, 10, 10)
             ctx.closePath();
         }
-        
     }
+    
     return(null)
 }
 
@@ -73,4 +81,4 @@ d[501].dirty = true
 d[502].dirty = true
 d[503].dirty = true
 
-dra = setInterval(draw, 1000)
+dra = setInterval(draw, 1)
